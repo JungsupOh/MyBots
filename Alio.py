@@ -28,11 +28,9 @@ def txt_reader(name):
 
 
 def alio_bidinfo(driver, query, csv_filename):
-    bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
-    print('Bot Connected..')
     try:
         # 입찰정보 결과 넣을 Excel File
-        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler/ALIO_BidInfo.xlsx')
+        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler2/ALIO_BidInfo.xlsx')
 
         # 입찰정보 검색 페이지로 이동
         driver.get('http://www.alio.go.kr/informationBid.do')
@@ -58,7 +56,9 @@ def alio_bidinfo(driver, query, csv_filename):
                             startrow=0, startcol=0, best_fit=['제목'])
 
         # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
-        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler/ALIO_BidInfo.xlsx', 'rb'))
+        bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
+        print('Bot Connected..')
+        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler2/ALIO_BidInfo.xlsx', 'rb'))
 
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력

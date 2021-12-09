@@ -15,8 +15,8 @@ def txt_reader(name):
 
 
 # 크롬 옵션 세팅
-csv_filename = '/home/bidding/Documents/BidCrawler/입찰공고목록.csv'
-xls_filename = '/home/bidding/Documents/BidCrawler/지원사업조회.xls'
+csv_filename = '/home/bidding/Documents/BidCrawler2/입찰공고목록.csv'
+xls_filename = '/home/bidding/Documents/BidCrawler2/지원사업조회.xls'
 
 localdir = os.path.dirname(os.path.realpath(csv_filename))
 chromeOptions = webdriver.ChromeOptions()
@@ -32,16 +32,16 @@ if os.path.isfile(xls_filename):
     os.remove(xls_filename)
 
 # 크롬 드라이버로 크롬을 실행한다.
-driver = webdriver.Chrome(executable_path='/home/bidding/Documents/BidCrawler/chromedriver', options=chromeOptions)
+driver = webdriver.Chrome(executable_path='/home/bidding/Documents/BidCrawler2/chromedriver', options=chromeOptions)
 
 # 검색어 목록 읽기
-query = txt_reader('/home/bidding/Documents/BidCrawler/BidKeywords.txt')
+query = txt_reader('/home/bidding/Documents/BidCrawler2/BidKeywords.txt')
 
 try:
-    if not nara_market(driver, query):
-        print('Error for Nara Market')
-    if not alio_bidinfo(driver, query, csv_filename):
-        print('Error for ALIO Bidinfo')
+#    if not nara_market(driver, query):
+#        print('Error for Nara Market')
+#    if not alio_bidinfo(driver, query, csv_filename):
+#        print('Error for ALIO Bidinfo')
     if not biz_info(driver, xls_filename):
         print('Error for BizInfo')
 

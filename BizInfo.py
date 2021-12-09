@@ -28,10 +28,9 @@ def txt_reader(name):
 
 
 def biz_info(driver, xls_filename):
-    bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
     try:
         # 입찰정보 결과 넣을 Excel File
-        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler/Biz_Info.xlsx')
+        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler2/Biz_Info.xlsx')
 
         # 입찰정보 검색 페이지로 이동
         driver.get('https://www.bizinfo.go.kr/see/seea/selectSEEA100.do?sportRearmCode=06&menuId=80001001001&firstYn=N')
@@ -68,8 +67,14 @@ def biz_info(driver, xls_filename):
                         header=True, index=True, index_label="No.",
                         startrow=0, startcol=0, best_fit=['지원사업명'])
 
+
+        writer.save()
+        writer.close()
+
         # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
-        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler/Biz_Info.xlsx', 'rb'))
+        bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
+        print('BizInfo>> Bot Connected..')
+        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler2/Biz_Info.xlsx', 'rb'))
 
         # notify new info / within a week
         for idx, row in df_new.iterrows():

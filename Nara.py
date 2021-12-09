@@ -7,13 +7,17 @@ import pandas as pd
 
 
 def nara_market(driver, query):
-    bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
     try:
         # 입찰정보 결과 넣을 Excel File
-        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler/NaraBidInfo.xlsx')
+        xls_filename = '/home/bidding/Documents/BidCrawler2/NaraBidInfo.xlsx'
+        writer = StyleFrame.ExcelWriter(xls_filename)
 
         # 입찰정보 검색 페이지로 이동
-        driver.get('http://www.g2b.go.kr:8101/ep/tbid/tbidFwd.do')
+        driver.get('https://www.g2b.go.kr/pt/menu/selectSubFrame.do?framesrc=/pt/menu/frameTgong.do?url=https://www.g2b.go.kr:8101/ep/tbid/tbidFwd.do?bidSearchType=1')
+
+      # Change Frame
+        driver.switch_to.frame("sub")
+        driver.switch_to.frame("main")
 
         # 업무 종류 체크, '전체': 'taskClCds'
         task_dict = {'물품': 'taskClCds1', '용역': 'taskClCds5', '민간': 'taskClCds20', '기타': 'taskClCds4'}
@@ -83,12 +87,14 @@ def nara_market(driver, query):
             search_button.click()
 
         # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
-        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler/NaraBidInfo.xlsx', 'rb'))
+        bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
+        print('NARA>> Bot Connected..')
+        bot.sendDocument(chat_id=1631327665, document=open(xls_filename, 'rb'))
 
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력
         print(e)
-        bot.sendMessage(chat_id=167233193, text='나라장터 공고 취합 실패!!')
+        bot.sendMessage(chat_id=1631327665, text='나라장터 공고 취합 실패!!')
         return False
 
     finally:
