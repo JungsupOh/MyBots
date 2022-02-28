@@ -5,6 +5,7 @@ import telegram
 import urllib
 import datetime
 from datetime import timedelta
+import sys
 
 def autoconvert_datetime(value):
     formats = ['%Y.%m.%d', '%m/%d/%Y', '%m-%d-%y']  # formats to try
@@ -25,8 +26,12 @@ def txt_reader(name):
 
     return lines
 
-root_path = '/Users/james/Documents/GitHub/MyBots/'
+if sys.platform.startswith("linux"):
+    root_path = '/home/tebah/MyBots/'
+else:
+    root_path = '/Users/james/Documents/GitHub/MyBots/'
 
+print('root_path :: ' + root_path)
 
 query = txt_reader(root_path + 'BidKeywords.txt')
 print('Debug #12')
