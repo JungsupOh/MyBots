@@ -1,6 +1,8 @@
 # 크롬 브라우저를 띄우기 위해, 웹드라이버를 가져오기
 import os
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from Nara import nara_market
 from Alio import alio_bidinfo
 from BizInfo import biz_info
@@ -15,8 +17,9 @@ def txt_reader(name):
 
 
 # 크롬 옵션 세팅
-csv_filename = '/home/bidding/Documents/BidCrawler2/입찰공고목록.csv'
-xls_filename = '/home/bidding/Documents/BidCrawler2/지원사업조회.xls'
+root_path = '/Users/james/Documents/GitHub/MyBots/'
+csv_filename = root_path + '입찰공고목록.csv'
+xls_filename = root_path + '지원사업조회.xls'
 
 localdir = os.path.dirname(os.path.realpath(csv_filename))
 chromeOptions = webdriver.ChromeOptions()
@@ -31,18 +34,22 @@ if os.path.isfile(csv_filename):
 if os.path.isfile(xls_filename):
     os.remove(xls_filename)
 
-# 크롬 드라이버로 크롬을 실행한다.
-driver = webdriver.Chrome(executable_path='/home/bidding/Documents/BidCrawler2/chromedriver', options=chromeOptions)
 
+# 크롬 드라이버로 크롬을 실행한다.
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chromeOptions)
+
+print('Debug #11')
 # 검색어 목록 읽기
-query = txt_reader('/home/bidding/Documents/BidCrawler2/BidKeywords.txt')
+query = txt_reader(root_path + 'BidKeywords.txt')
+print('Debug #12')
 
 try:
 #    if not nara_market(driver, query):
 #        print('Error for Nara Market')
 #    if not alio_bidinfo(driver, query, csv_filename):
 #        print('Error for ALIO Bidinfo')
-    if not biz_info(driver, xls_filename):
+    print('Debug #13')
+    if not biz_info(driver, xls_filename, query):
         print('Error for BizInfo')
 
 except Exception as e:

@@ -5,7 +5,8 @@ import telegram
 from styleframe import StyleFrame
 import pandas as pd
 import time
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 def autoconvert_datetime(value):
     formats = ['%Y.%m.%d', '%m/%d/%Y', '%m-%d-%y']  # formats to try
@@ -27,58 +28,57 @@ def txt_reader(name):
     return lines
 
 
-def biz_info(driver, xls_filename):
+
+def biz_info(driver, xls_filename, query):
     try:
+        root_path = '/Users/james/Documents/GitHub/MyBots/'
+        
         # 입찰정보 결과 넣을 Excel File
-        writer = StyleFrame.ExcelWriter('/home/bidding/Documents/BidCrawler2/Biz_Info.xlsx')
+        #writer = StyleFrame.ExcelWriter(root_path + 'Biz_Info.xlsx')
+        print('Debug #1')
 
         # 입찰정보 검색 페이지로 이동
-        driver.get('https://www.bizinfo.go.kr/see/seea/selectSEEA100.do?sportRearmCode=06&menuId=80001001001&firstYn=N')
+        driver.get('https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/list.do')
+        print('Debug #2')
 
-        driver.find_element_by_xpath("//a[contains(@onclick,'fn_detailExcelOpen(1);return false;')]").click()
-        time.sleep(3)
-
-
-        # CSV to dataframe
-        biz_xls = pd.read_excel(xls_filename, header=1, skiprows=1)
-
-        # Find keywords from Biz_info csv
-        df_global = biz_xls[biz_xls["지원사업명"].str[0] != '[']
-        df_local = biz_xls[biz_xls["지원사업명"].str.contains('대전')]
-        df = pd.concat([df_global, df_local])
-
-        df_new = df[df['등록일'].apply(autoconvert_datetime) > str(datetime.date.today()-timedelta(weeks=1))]
-
-        print('Found %4d Items for Global, Found %4d Items for Local' % (df_global.shape[0], df_local.shape[0]))
-
-        g_row = df.shape[0]
-        if g_row > 0:
-            sf = StyleFrame(df_global)
-            # -- write an object to an Excel sheet using pd.DataFrame.to_excel()
-            sf.to_excel(writer, sheet_name='전국', na_rep='NaN', float_format="%.2f",
-                        header=True, index=True, index_label="No.",
-                        startrow=0, startcol=0, best_fit=['지원사업명'])
-
-        l_row = df.shape[0]
-        if l_row > 0:
-            sf = StyleFrame(df_local)
-            # -- write an object to an Excel sheet using pd.DataFrame.to_excel()
-            sf.to_excel(writer, sheet_name='대전', na_rep='NaN', float_format="%.2f",
-                        header=True, index=True, index_label="No.",
-                        startrow=0, startcol=0, best_fit=['지원사업명'])
-
-
-        writer.save()
-        writer.close()
+        # 검색옵션 100건 선택 (드롭다운)
+        searchoption = driver.find_element(by=By.XPATH, value="//div[@class='custom_select']").click()
+        time.sleep(1)
+        print('Debug #2-1')
+        searchoption = driver.find_element(by=By.XPATH, value="//button[@data-option='pldirJrsdCodeNm']").click()
+        time.sleep(1)
+        print('Debug #2-2')
 
         # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
         bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
         print('BizInfo>> Bot Connected..')
-        bot.sendDocument(chat_id=167233193, document=open('/home/bidding/Documents/BidCrawler2/Biz_Info.xlsx', 'rb'))
 
-        # notify new info / within a week
-        for idx, row in df_new.iterrows():
-            bot.sendMessage(chat_id=167233193, text=row['지원사업명']+'\n'+row['상세 URL'])
+        for keyword in query:
+            
+            # id값이 bidNm인 태그 가져오기
+            searchInput = driver.find_element(by=By.XPATH, value="//input[@name='keyword']")
+            print('Debug #3')
+            # 내용을 삭제 (버릇처럼 사용할 것!)
+            searchInput.clear()
+            # 검색어 입력후 엔터
+            searchInput.send_keys(keyword)
+            searchInput.send_keys(Keys.RETURN)
+            print('Debug #3, Keyword: '+ keyword)
+
+            # Read and Convert Web table into data frame
+            webtable_df = pd.read_html(driver.find_element(by=By.XPATH, value="//div[@class='table_Type_1']").get_attribute('innerHTML'))[0]
+
+            print(webtable_df)
+            
+           
+
+            # notify new info / within a week
+            for idx, row in df_new.iterrows():
+                bot.sendMessage(chat_id=167233193, text=row['지원사업명']+'\n'+row['상세 URL'])
+
+        
+        
+
 
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력
