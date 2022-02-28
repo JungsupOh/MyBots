@@ -62,7 +62,7 @@ for keyword in query:
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text=keyword)
+        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
             bot.sendMessage(chat_id=167233193, text=row['지원사업명']+'\n'+row['Link'])
