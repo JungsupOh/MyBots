@@ -63,12 +63,13 @@ print(url+ " Connected")
 
 li_list = driver.find_elements(by=By.XPATH, value="//li[@class='ranking_rankingItem__1a-1o']")
 print(li_list)
-links = []
+print("::Debug 12::")
+
 rank = 1
 for each in li_list:
     try:
         a_tags = each.find_elements(by=By.TAG_NAME,value='a')
-        print(a_tags)
+        print("debug11:: " + a_tags)
         #[0]:data [1]:image
         link=a_tags[0].get_attribute('href')
         bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
