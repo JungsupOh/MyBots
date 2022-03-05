@@ -52,7 +52,8 @@ chromeOptions.add_argument('headless')
 chromeOptions.add_argument('no-sandbox')
 
 # 크롬 드라이버로 크롬을 실행한다.
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chromeOptions)
+#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chromeOptions)
+driver = webdriver.Chrome(executable_path=root_path+'chromedriver', options=chromeOptions)
 print('Debug #Chrome Driver Initialized')
 
 # 입찰정보 검색 페이지로 이동
