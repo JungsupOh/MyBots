@@ -71,7 +71,8 @@ for each in li_list:
     print("debug11:: " +str(rank) + ' --> '+ str(len(a_tags)))
     #[0]:data [1]:image
     link=a_tags[0].get_attribute('href')
-    bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
+    #bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
+    bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+link)
     rank=rank+1
 
 
