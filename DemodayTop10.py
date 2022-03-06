@@ -77,3 +77,5 @@ for each in li_list:
 
 
 bot.sendMessage(chat_id=167233193, text='======= End of Demoday =======')
+
+driver.close()
