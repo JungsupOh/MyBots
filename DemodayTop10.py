@@ -72,7 +72,7 @@ for each in li_list:
     #[0]:data [1]:image
     link=a_tags[0].get_attribute('href')
     #bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
-    bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+link)
+    bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].text+link)
     rank=rank+1
 
 
