@@ -63,17 +63,17 @@ print("::Debug 12::")
 bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
 print('BizInfo>> Bot Connected..')
 bot.sendMessage(chat_id=167233193, text='..')
-bot.sendMessage(chat_id=167233193, text='>>> Demoday Top 10 ('+str(datetime.date.today())+') >>>')
+bot.sendMessage(chat_id=167233193, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
 
 
-rank = 1
+rank = 0
 for each in li_list:
     a_tags = each.find_elements(by=By.TAG_NAME,value='a')
     print("debug11:: " +str(rank) + ' --> '+ str(len(a_tags)))
     #[0]:data [1]:image
     link=a_tags[0].get_attribute('href')
     #bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
-    bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].text+link)
+    bot.sendMessage(chat_id=167233193, text=li_list[rank].text+'\n'+link)
     rank=rank+1
 
 
