@@ -39,12 +39,6 @@ else:
 
 print('root_path :: ' + root_path)
 
-# bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
-bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
-print('BizInfo>> Bot Connected..')
-bot.sendMessage(chat_id=167233193, text='..')
-bot.sendMessage(chat_id=167233193, text='>>> Demoday Top 10 ('+str(datetime.date.today())+') >>>')
-
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory": root_path}
 chromeOptions.add_experimental_option("prefs", prefs)
@@ -57,13 +51,20 @@ driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), optio
 print('Debug #Chrome Driver Initialized')
 
 # 입찰정보 검색 페이지로 이동
-url = 'http://main.demoday.co.kr/'
+url = 'http://www.demoday.co.kr/'
 driver.get(url)
 print(url+ " Connected")
 
 li_list = driver.find_elements(by=By.XPATH, value="//li[@class='ranking_rankingItem__1a-1o']")
 print(li_list)
 print("::Debug 12::")
+
+# bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
+bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
+print('BizInfo>> Bot Connected..')
+bot.sendMessage(chat_id=167233193, text='..')
+bot.sendMessage(chat_id=167233193, text='>>> Demoday Top 10 ('+str(datetime.date.today())+') >>>')
+
 
 rank = 1
 for each in li_list:
