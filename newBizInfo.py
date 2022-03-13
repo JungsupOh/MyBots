@@ -33,6 +33,7 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
     print(url)
     df = pd.read_html(url)[0]
 
+ 
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser', from_encoding='euc-kr')
     table = soup.find('table')
@@ -45,19 +46,25 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
                 link = linkBaseAddr + each.find('a')['href']
                 links.append(link)
                 print(link)
+                break
             except:
                 pass
 
-    df['Link'] = links
+    if (len(links)>0) :
+        df['Link'] = links
 
     df_new = df[df[dateName].apply(autoconvert_datetime) > str(datetime.date.today()-timedelta(days=5))]
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')
+        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')  
+
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
-            bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row['Link'])
+            if len(links) > 0 :
+                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row['Link'])
+            else :
+                bot.sendMessage(chat_id=167233193, text=row[titelName])
 
 #function to read from html and send text to bot
 def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
@@ -76,10 +83,12 @@ def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
                 link = linkBaseAddr + each.find('a')['href']
                 links.append(link)
                 print(link)
+                break
             except:
                 pass
 
-    df['Link'] = links
+    if (len(links)>0) :
+        df['Link'] = links
 
     df_new = df.head(5)
 
@@ -88,7 +97,10 @@ def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
         bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
-            bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
+            if len(links) > 0 :
+                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
+            else :
+                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')')
 
 
 
