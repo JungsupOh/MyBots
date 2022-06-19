@@ -57,14 +57,14 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')  
+        bot.sendMessage(chat_id=-1001765651328, text='(('+keyword+'))')  
 
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
             if len(links) > 0 :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row['Link'])
+                bot.sendMessage(chat_id=-1001765651328, text=row[titelName]+'\n'+row['Link'])
             else :
-                bot.sendMessage(chat_id=167233193, text=row[titelName])
+                bot.sendMessage(chat_id=-1001765651328, text=row[titelName])
 
 #function to read from html and send text to bot
 def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
@@ -94,13 +94,13 @@ def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')
+        bot.sendMessage(chat_id=-1001765651328, text='(('+keyword+'))')
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
             if len(links) > 0 :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
+                bot.sendMessage(chat_id=-1001765651328, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
             else :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')')
+                bot.sendMessage(chat_id=-1001765651328, text=row[titelName]+'\n'+'('+row[dateName]+')')
 
 
 
@@ -126,7 +126,7 @@ for keyword in query:
     dateName = '등록일'
     linkName = 'Link'
 
-    readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr)
+    #readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr)
 
 '''
     print(url)
@@ -162,10 +162,10 @@ for keyword in query:
 ## 단순히 테이블로 되어 있는 페이지들.. 순차 방문..
 
 #NIPA 
-readHTMLtoBot(bot, 'https://www.nipa.kr/main/selectBbsNttList.do?bbsNo=2&key=122', '제목', '작성일', 'Nipa', 'https://www.nipa.kr/main/')
+#readHTMLtoBot(bot, 'https://www.nipa.kr/main/selectBbsNttList.do?bbsNo=2&key=122', '제목', '작성일', 'Nipa', 'https://www.nipa.kr/main/')
 
 #한국발명진흥회 
-readHTMLtoBot(bot, 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp', '제목', '등록일', '한국발명진흥회', 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp')
+#readHTMLtoBot(bot, 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp', '제목', '등록일', '한국발명진흥회', 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp')
 
 #대전정보문화산업진흥원
 readHTMLtoBot(bot, 'http://www.dicia.or.kr/sub.do?menuIdx=MENU_000000000000056', '제목', '작성일', '대전정보문화산업진흥원', 'http://www.dicia.or.kr/')
@@ -177,4 +177,4 @@ readHTMLtoBot(bot, 'https://www2.ripc.org/regional/notice/daejeon/bizNoticeList.
 readHTMLtoBotTop5(bot, 'https://www.iitp.kr/kr/1/business/businessApiList.it?pageIndex=0&pageSize=10&searchText=&searchField=all', '공고명', '접수기간', 'IITP Top5', '')
 
 
-bot.sendMessage(chat_id=167233193, text='======= '+str(datetime.date.today())+' =======')
+bot.sendMessage(chat_id=-1001765651328, text='======= '+str(datetime.date.today())+' =======')

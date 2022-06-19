@@ -58,4 +58,7 @@ Use this token to access the HTTP API:
 Keep your token secure and store it safely, it can be used by anyone to control your bot.
 Jungsup's chat_id=167233193
 channel = -1001551112836
+
+https://web.telegram.org/z/ replace #- to -100
+
 '''

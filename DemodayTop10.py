@@ -62,8 +62,8 @@ print("::Debug 12::")
 # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
 bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
 print('BizInfo>> Bot Connected..')
-bot.sendMessage(chat_id=167233193, text='..')
-bot.sendMessage(chat_id=167233193, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
+bot.sendMessage(chat_id=-1001765651328, text='..')
+bot.sendMessage(chat_id=-1001765651328, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
 
 
 rank = 0
@@ -73,11 +73,11 @@ for each in li_list:
     #[0]:data [1]:image
     link=a_tags[0].get_attribute('href')
     #bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
-    bot.sendMessage(chat_id=167233193, text=li_list[rank].text+'\n'+link)
+    bot.sendMessage(chat_id=-1001765651328, text=li_list[rank].text+'\n'+link)
     rank=rank+1
 
 
-bot.sendMessage(chat_id=167233193, text='======= End of Demoday =======')
+bot.sendMessage(chat_id=-1001765651328, text='======= End of Demoday =======')
 
 driver.close()
 driver.quit()

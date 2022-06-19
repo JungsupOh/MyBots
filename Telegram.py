@@ -10,6 +10,7 @@ import time
 bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
 print('Bot Connected..')
 
-bot.sendMessage(chat_id=-1001551112836, text='Hello~~ 안녕하세요..')
+bot.sendMessage(chat_id=-1001681320740, text='Hello~~ 안녕하세요..')
 # bot.sendDocument(chat_id=-597319317, document=open('/home/bidding/Documents/BidCrawler/ALIO_BidInfo.xlsx', 'rb'))
-
+# finger.ai 매출 채널:   -1001681320740
+# NSE Bidding 채널:     -1001551112836
