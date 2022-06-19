@@ -117,7 +117,7 @@ print('Debug #12')
 # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
 bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
 print('BizInfo>> Bot Connected..')
-bot.sendMessage(chat_id=167233193, text='>>>>> '+str(datetime.date.today())+' >>>>>>>')
+bot.sendMessage(chat_id=-1001765651328, text='>>>>> '+str(datetime.date.today())+' >>>>>>>')
 
 for keyword in query:
     url = 'https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/list.do?hashCode=&rowsSel=6&rows=30&cpage=1&cat=&article_seq=&pblancId=&schJrsdCodeTy=&schEndAt=N&condition=pldirJrsdCodeNm&keyword='+urllib.parse.quote(keyword)
@@ -126,7 +126,7 @@ for keyword in query:
     dateName = '등록일'
     linkName = 'Link'
 
-    #readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr)
+    readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr)
 
 '''
     print(url)
@@ -162,10 +162,10 @@ for keyword in query:
 ## 단순히 테이블로 되어 있는 페이지들.. 순차 방문..
 
 #NIPA 
-#readHTMLtoBot(bot, 'https://www.nipa.kr/main/selectBbsNttList.do?bbsNo=2&key=122', '제목', '작성일', 'Nipa', 'https://www.nipa.kr/main/')
+readHTMLtoBot(bot, 'https://www.nipa.kr/main/selectBbsNttList.do?bbsNo=2&key=122', '제목', '작성일', 'Nipa', 'https://www.nipa.kr/main/')
 
 #한국발명진흥회 
-#readHTMLtoBot(bot, 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp', '제목', '등록일', '한국발명진흥회', 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp')
+readHTMLtoBot(bot, 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp', '제목', '등록일', '한국발명진흥회', 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp')
 
 #대전정보문화산업진흥원
 readHTMLtoBot(bot, 'http://www.dicia.or.kr/sub.do?menuIdx=MENU_000000000000056', '제목', '작성일', '대전정보문화산업진흥원', 'http://www.dicia.or.kr/')
