@@ -8,6 +8,9 @@ import urllib
 import datetime
 from datetime import timedelta
 import sys
+import time
+
+
 
 def autoconvert_datetime(value):
     formats = ['%Y.%m.%d', '%m/%d/%Y', '%m-%d-%y']  # formats to try
@@ -159,19 +162,24 @@ for keyword in query:
             bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row[linkName])
 '''
 
+time.sleep(10)
 ## 단순히 테이블로 되어 있는 페이지들.. 순차 방문..
 
 #NIPA 
 readHTMLtoBot(bot, 'https://www.nipa.kr/main/selectBbsNttList.do?bbsNo=2&key=122', '제목', '작성일', 'Nipa', 'https://www.nipa.kr/main/')
+time.sleep(10)
 
 #한국발명진흥회 
 readHTMLtoBot(bot, 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp', '제목', '등록일', '한국발명진흥회', 'https://www.kipa.org/kipa/notice/kw_0403_01.jsp')
+time.sleep(10)
 
 #대전정보문화산업진흥원
 readHTMLtoBot(bot, 'http://www.dicia.or.kr/sub.do?menuIdx=MENU_000000000000056', '제목', '작성일', '대전정보문화산업진흥원', 'http://www.dicia.or.kr/')
+time.sleep(10)
 
 #대전지식재산센터 
 readHTMLtoBot(bot, 'https://www2.ripc.org/regional/notice/daejeon/bizNoticeList.do', '제목', '등록일', '대전지식재산센터', 'https://www.djtp.or.kr/')
+time.sleep(10)
 
 #IITP top5
 readHTMLtoBotTop5(bot, 'https://www.iitp.kr/kr/1/business/businessApiList.it?pageIndex=0&pageSize=10&searchText=&searchField=all', '공고명', '접수기간', 'IITP Top5', '')
