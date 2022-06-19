@@ -65,8 +65,8 @@ print('BizInfo>> Bot Connected..')
 bot.sendMessage(chat_id=167233193, text='..')
 bot.sendMessage(chat_id=167233193, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
 
-bot.sendMessage(chat_id=5290341890, text='..')
-bot.sendMessage(chat_id=5290341890, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
+#bot.sendMessage(chat_id=5290341890, text='..')
+#bot.sendMessage(chat_id=5290341890, text='> Demoday Top 10 ('+str(datetime.date.today())+') >')
 
 
 rank = 0
@@ -77,12 +77,12 @@ for each in li_list:
     link=a_tags[0].get_attribute('href')
     #bot.sendMessage(chat_id=167233193, text=str(rank)+') \n'+a_tags[0].accessible_name+'\n'+link)
     bot.sendMessage(chat_id=167233193, text=li_list[rank].text+'\n'+link)
-    bot.sendMessage(chat_id=5290341890, text=li_list[rank].text+'\n'+link)
+    #bot.sendMessage(chat_id=5290341890, text=li_list[rank].text+'\n'+link)
     rank=rank+1
 
 
-bot.sendMessage(chat_id=-167233193, text='======= End of Demoday =======')
-bot.sendMessage(chat_id=-5290341890, text='======= End of Demoday =======')
+bot.sendMessage(chat_id=167233193, text='======= End of Demoday =======')
+#bot.sendMessage(chat_id=5290341890, text='======= End of Demoday =======')
 
 driver.close()
 driver.quit()
