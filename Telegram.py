@@ -13,5 +13,5 @@ print('Bot Connected..')
 bot.sendMessage(chat_id=5290341890, text='Hello~~ 안녕하세요.. 저는 Tebahsoft Bot 입니다.')
 # bot.sendDocument(chat_id=-597319317, document=open('/home/bidding/Documents/BidCrawler/ALIO_BidInfo.xlsx', 'rb'))
 # finger.ai 매출 채널:   -1001681320740
-# NSE Bidding 채널:     -1001551112836
+# 테바소프트 채널:     -1001765651328
 # Jaden; 5290341890
