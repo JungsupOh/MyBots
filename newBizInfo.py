@@ -60,16 +60,16 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')  
+        bot.sendMessage(chat_id=-1001551112836, text='(('+keyword+'))')  
         #bot.sendMessage(chat_id=5290341890, text='(('+keyword+'))')  
 
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
             if len(links) > 0 :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row['Link'])
+                bot.sendMessage(chat_id=-1001551112836, text=row[titelName]+'\n'+row['Link'])
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName]+'\n'+row['Link'])
             else :
-                bot.sendMessage(chat_id=167233193, text=row[titelName])
+                bot.sendMessage(chat_id=-1001551112836, text=row[titelName])
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName])
 
 #function to read from html and send text to bot
@@ -100,15 +100,16 @@ def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
 
     print(df_new)
     if df_new.shape[0] > 0:
-        bot.sendMessage(chat_id=167233193, text='(('+keyword+'))')
+        time.sleep(10)
+        bot.sendMessage(chat_id=-1001551112836, text='(('+keyword+'))')
         #bot.sendMessage(chat_id=5290341890, text='(('+keyword+'))')
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
             if len(links) > 0 :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
+                bot.sendMessage(chat_id=-1001551112836, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
             else :
-                bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+'('+row[dateName]+')')
+                bot.sendMessage(chat_id=-1001551112836, text=row[titelName]+'\n'+'('+row[dateName]+')')
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName]+'\n'+'('+row[dateName]+')')
 
 
@@ -126,7 +127,7 @@ print('Debug #12')
 # bot.sendMessage(chat_id=167233193, text='Hello~~ 안녕하세요..')
 bot = telegram.Bot(token='1631327665:AAEX8hykT_WuTjQXWYnxigN1jM1WBqHAip4')
 print('BizInfo>> Bot Connected..')
-bot.sendMessage(chat_id=167233193, text='>>>>> '+str(datetime.date.today())+' >>>>>>>')
+bot.sendMessage(chat_id=-1001551112836, text='>>>>> '+str(datetime.date.today())+' >>>>>>>')
 #bot.sendMessage(chat_id=5290341890, text='>>>>> '+str(datetime.date.today())+' >>>>>>>')
 
 for keyword in query:
@@ -192,5 +193,5 @@ time.sleep(10)
 readHTMLtoBotTop5(bot, 'https://www.iitp.kr/kr/1/business/businessApiList.it?pageIndex=0&pageSize=10&searchText=&searchField=all', '공고명', '접수기간', 'IITP Top5', '')
 
 
-bot.sendMessage(chat_id=167233193, text='======= '+str(datetime.date.today())+' =======')
+bot.sendMessage(chat_id=-1001551112836, text='======= '+str(datetime.date.today())+' =======')
 #bot.sendMessage(chat_id=5290341890, text='======= '+str(datetime.date.today())+' =======')
