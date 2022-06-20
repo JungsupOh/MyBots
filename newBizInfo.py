@@ -60,11 +60,13 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
 
     print(df_new)
     if df_new.shape[0] > 0:
+        time.sleep(10)
         bot.sendMessage(chat_id=-1001765651328, text='(('+keyword+'))')  
         #bot.sendMessage(chat_id=5290341890, text='(('+keyword+'))')  
 
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
+            time.sleep(3)
             if len(links) > 0 :
                 bot.sendMessage(chat_id=-1001765651328, text=row[titelName]+'\n'+row['Link'])
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName]+'\n'+row['Link'])
@@ -105,6 +107,7 @@ def readHTMLtoBotTop5(bot, url, titelName, dateName, keyword, linkBaseAddr):
         #bot.sendMessage(chat_id=5290341890, text='(('+keyword+'))')
         # notify new info / within a 5days
         for idx, row in df_new.iterrows():
+            time.sleep(3)
             if len(links) > 0 :
                 bot.sendMessage(chat_id=-1001765651328, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
                 #bot.sendMessage(chat_id=5290341890, text=row[titelName]+'\n'+'('+row[dateName]+')\n'+row['Link'])
