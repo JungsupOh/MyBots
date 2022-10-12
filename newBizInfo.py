@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -35,7 +40,6 @@ def txt_reader(name):
 def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
     print(url)
     df = pd.read_html(url)[0]
-
  
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser', from_encoding='euc-kr')
@@ -56,7 +60,7 @@ def readHTMLtoBot(bot, url, titelName, dateName, keyword, linkBaseAddr):
     if (len(links)>0) :
         df['Link'] = links
 
-    df_new = df[df[dateName].apply(autoconvert_datetime) > str(datetime.date.today()-timedelta(days=5))]
+    df_new = df[df[dateName].apply(autoconvert_datetime) > str(datetime.date.today()-timedelta(days=7))]
 
     print(df_new)
     if df_new.shape[0] > 0:
@@ -172,7 +176,6 @@ for keyword in query:
         for idx, row in df_new.iterrows():
             bot.sendMessage(chat_id=167233193, text=row[titelName]+'\n'+row[linkName])
 '''
-
 time.sleep(10)
 ## 단순히 테이블로 되어 있는 페이지들.. 순차 방문..
 
@@ -192,9 +195,19 @@ time.sleep(10)
 readHTMLtoBot(bot, 'https://www2.ripc.org/regional/notice/daejeon/bizNoticeList.do', '제목', '등록일', '대전지식재산센터', 'https://www.djtp.or.kr/')
 time.sleep(10)
 
+#보건산업진흥원 
+readHTMLtoBot(bot, 'https://www.khidi.or.kr/board?menuId=MENU01484&siteId=SITE00004', '제목', '등록일', '의료기기산업 종합정보시스템', 'https://www.khidi.or.kr/')
+time.sleep(10)
+
 #IITP top5
 readHTMLtoBotTop5(bot, 'https://www.iitp.kr/kr/1/business/businessApiList.it?pageIndex=0&pageSize=10&searchText=&searchField=all', '공고명', '접수기간', 'IITP Top5', '')
+time.sleep(10)
 
+#DIPS top5
+readHTMLtoBotTop5(bot, 'https://www.dips.or.kr/pbanc?nPage=1&mid=a10201000000&pbancYr=&bizTpCd=&prgStt=&cgDeptNm=&pbancNm=', '공고명', '접수기간', 'DIPS Top5', '')
+
+#NARA Market
+#nara_market(bot)
 
 bot.sendMessage(chat_id=-1001765651328, text='======= '+str(datetime.date.today())+' =======')
 #bot.sendMessage(chat_id=5290341890, text='======= '+str(datetime.date.today())+' =======')

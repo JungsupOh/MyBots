@@ -74,12 +74,8 @@ def biz_info(driver, xls_filename, query):
 
             # notify new info / within a week
             for idx, row in df_new.iterrows():
-                bot.sendMessage(chat_id=167233193, text=row['지원사업명']+'\n'+row['상세 URL'])
-
+                bot.sendMessage(chat_id=167233193, text=row['지원사업명']+'\n'+row['상세 URL'])    
         
-        
-
-
     except Exception as e:
         # 위 코드에서 에러가 발생한 경우 출력
         print(e)
